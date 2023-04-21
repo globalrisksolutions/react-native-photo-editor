@@ -5,6 +5,8 @@ export type Options = {
   path: String;
   stickers: Array<String>;
   hideControls?: Array<PhotoEditControls>;
+  colorPrimary?:String;
+  colorAccent?:String;
 };
 
 export type ErrorCode =

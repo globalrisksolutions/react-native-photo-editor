@@ -32,10 +32,14 @@ class PhotoEditorModule(reactContext: ReactApplicationContext) : ReactContextBas
     val path = options?.getString("path")
     val stickers = options?.getArray("stickers") as ReadableArray
     val hideControls = options?.getArray("hideControls") as ReadableArray
+    val colorPrimary = options?.getString("colorPrimary")
+    val colorAccent = options?.getString("colorAccent")
 
     intent.putExtra("path", path)
     intent.putExtra("stickers", stickers.toArrayList())
     intent.putExtra("hideControls", hideControls.toArrayList())
+    intent.putExtra("colorPrimary", colorPrimary)
+    intent.putExtra("colorAccent", colorAccent)
 
     activity.startActivityForResult(intent, EDIT_SUCCESSFUL)
   }

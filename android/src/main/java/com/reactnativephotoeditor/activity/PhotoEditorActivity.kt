@@ -101,6 +101,22 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
 
     val hideControls =
       value?.getStringArrayList("hideControls")
+
+    val colorPrimary = value.getString("colorPrimary")
+    val colorAccent = value.getString("colorAccent")
+
+    if (colorPrimary != null) {
+      Log.d("colorPrimary", colorPrimary)
+      findViewById<LinearLayout>(R.id.header).setBackgroundColor(Color.parseColor(colorPrimary))
+    } else {
+      Log.d("colorPrimary", "null")
+    }
+    if (colorAccent != null) {
+      Log.d("colorAccent", colorAccent)
+    } else {
+      Log.d("colorAccent", "null")
+    }
+
     mEditingToolsAdapter = EditingToolsAdapter(this, hideControls)
 
     mPropertiesBSFragment = PropertiesBSFragment()
@@ -162,7 +178,8 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
       .into(mPhotoEditorView!!.source)
 
     isShowCropLoading = false
-    val imgUri = if (path?.startsWith("http") == true) Uri.parse(path) else Uri.fromFile(File(path!!))
+    val imgUri =
+      if (path?.startsWith("http") == true) Uri.parse(path) else Uri.fromFile(File(path!!))
     val uCrop: UCrop? = UCrop.of(imgUri, Uri.fromFile(File(getTmpDir(), "TempCropImage.jpg")))
     cropFragment = uCrop?.getFragment(uCrop.getIntent(this).extras)
     supportFragmentManager.beginTransaction()
@@ -215,9 +232,8 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
     val imgClose: ImageView = findViewById(R.id.imgClose)
     imgClose.setOnClickListener(this)
     //SAVE
-    val btnSave: TextView = findViewById(R.id.btnSave)
+    val btnSave: ImageView = findViewById(R.id.btnSave)
     btnSave.setOnClickListener(this)
-    btnSave.setTextColor(Color.BLACK)
 
     mPhotoEditorView = findViewById(R.id.photoEditorView)
     mTxtCurrentTool = findViewById(R.id.txtCurrentTool)
@@ -293,28 +309,29 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
   private fun saveImage() {
     val fileName = System.currentTimeMillis().toString() + ".png"
 //    if (isSdkHigherThan28()) {
-      showLoading("Saving...")
-      mPhotoEditor!!.saveAsFile(getTmpDir() + fileName, object : OnSaveListener {
-        override fun onSuccess(@NonNull imagePath: String) {
-          hideLoading()
-          val intent = Intent()
-          intent.putExtra("path", imagePath)
-          setResult(ResponseCode.RESULT_OK, intent)
-          finish()
-        }
+    showLoading("Saving...")
+    mPhotoEditor!!.saveAsFile(getTmpDir() + fileName, object : OnSaveListener {
+      override fun onSuccess(@NonNull imagePath: String) {
+        hideLoading()
+        val intent = Intent()
+        intent.putExtra("path", imagePath)
+        setResult(ResponseCode.RESULT_OK, intent)
+        finish()
+      }
 
-        override fun onFailure(@NonNull exception: Exception) {
-          hideLoading()
-          mPhotoEditorView?.let {
-            val snackBar = Snackbar.make(
-              it, R.string.save_error,
-              Snackbar.LENGTH_SHORT)
-            snackBar.setBackgroundTint(Color.WHITE)
-            snackBar.setActionTextColor(Color.BLACK)
-            snackBar.setAction("Ok", null).show()
-          }
+      override fun onFailure(@NonNull exception: Exception) {
+        hideLoading()
+        mPhotoEditorView?.let {
+          val snackBar = Snackbar.make(
+            it, R.string.save_error,
+            Snackbar.LENGTH_SHORT
+          )
+          snackBar.setBackgroundTint(Color.WHITE)
+          snackBar.setActionTextColor(Color.BLACK)
+          snackBar.setAction("Ok", null).show()
         }
-      })
+      }
+    })
 //    }
   }
 
@@ -413,12 +430,12 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
       .commit()
     if (mIsCropSetup) {
       val cropLayout = cropFragment?.view?.findViewById<RelativeLayout>(R.id.ucrop_photobox)
-        val childView = cropLayout?.getChildAt(2)
-        Log.d(TAG, "Child view id = " + childView?.id)
-        val isClickable = childView?.isClickable
-        if (isClickable == true) {
-          childView.isClickable = false
-        }
+      val childView = cropLayout?.getChildAt(2)
+      Log.d(TAG, "Child view id = " + childView?.id)
+      val isClickable = childView?.isClickable
+      if (isClickable == true) {
+        childView.isClickable = false
+      }
     }
     mIsCropSetup = true
   }
@@ -453,7 +470,7 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
     if (isShowCropLoading && showLoader) {
       Log.d(TAG, "Loading triggered.")
       showLoading("Cropping...")
-    } else if(isShowCropLoading) {
+    } else if (isShowCropLoading) {
       isShowCropLoading = false
       hideLoading()
     }
