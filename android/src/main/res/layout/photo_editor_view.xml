@@ -80,7 +80,7 @@
     android:layout_width="@dimen/top_tool_icon_width"
     android:layout_height="@dimen/top_tool_icon_width"
     android:src="@drawable/ic_undo"
-    app:layout_constraintBottom_toTopOf="@+id/rvConstraintTools"
+    app:layout_constraintTop_toBottomOf="@+id/guideline"
     app:layout_constraintEnd_toStartOf="@+id/imgRedo" />
 
   <ImageView
@@ -90,8 +90,8 @@
     android:layout_marginEnd="4dp"
     android:layout_marginRight="4dp"
     android:src="@drawable/ic_redo"
-    app:layout_constraintBottom_toTopOf="@+id/rvConstraintTools"
-    app:layout_constraintEnd_toEndOf="parent" />
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rvConstraintTools"
@@ -100,11 +100,11 @@
     android:background="@color/tool_bg"
     android:orientation="horizontal"
     android:paddingTop="4dp"
-    android:paddingBottom="4dp"
+    android:paddingBottom="8dp"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    app:layout_constraintBottom_toTopOf="@+id/guideline"
-    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/guideline"
     tools:listitem="@layout/row_editing_tools" />
 
   <androidx.recyclerview.widget.RecyclerView
