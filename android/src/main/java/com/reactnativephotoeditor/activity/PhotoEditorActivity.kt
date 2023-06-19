@@ -248,7 +248,7 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
       val styleBuilder = TextStyleBuilder()
       styleBuilder.withTextColor(newColorCode)
       mPhotoEditor!!.editText(rootView, inputText, styleBuilder)
-      mTxtCurrentTool!!.setText(R.string.label_text)
+     /* mTxtCurrentTool!!.setText(R.string.label_text)*/
     }
   }
 
@@ -341,17 +341,17 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
 
   override fun onColorChanged(colorCode: Int) {
     mPhotoEditor!!.setShape(mShapeBuilder!!.withShapeColor(colorCode))
-    mTxtCurrentTool!!.setText(R.string.label_brush)
+   /* mTxtCurrentTool!!.setText(R.string.label_brush)*/
   }
 
   override fun onOpacityChanged(opacity: Int) {
     mPhotoEditor!!.setShape(mShapeBuilder!!.withShapeOpacity(opacity))
-    mTxtCurrentTool!!.setText(R.string.label_brush)
+    /*mTxtCurrentTool!!.setText(R.string.label_brush)*/
   }
 
   override fun onShapeSizeChanged(shapeSize: Int) {
     mPhotoEditor!!.setShape(mShapeBuilder!!.withShapeSize(shapeSize.toFloat()))
-    mTxtCurrentTool!!.setText(R.string.label_brush)
+    /*mTxtCurrentTool!!.setText(R.string.label_brush)*/
   }
 
   override fun onShapePicked(shapeType: ShapeType) {
@@ -360,7 +360,7 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
 
   override fun onStickerClick(bitmap: Bitmap) {
     mPhotoEditor!!.addImage(bitmap)
-    mTxtCurrentTool!!.setText(R.string.label_sticker)
+    /*mTxtCurrentTool!!.setText(R.string.label_sticker)*/
   }
 
   private fun showSaveDialog() {
@@ -388,7 +388,7 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
         mPhotoEditor!!.setBrushDrawingMode(true)
         mShapeBuilder = ShapeBuilder()
         mPhotoEditor!!.setShape(mShapeBuilder)
-        mTxtCurrentTool!!.setText(R.string.label_shape)
+        /*mTxtCurrentTool!!.setText(R.string.label_shape)*/
         showBottomSheetDialogFragment(mShapeBSFragment)
       }
       ToolType.TEXT -> {
@@ -397,7 +397,7 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
           val styleBuilder = TextStyleBuilder()
           styleBuilder.withTextColor(colorCode)
           mPhotoEditor!!.addText(inputText, styleBuilder)
-          mTxtCurrentTool!!.setText(R.string.label_text)
+          /*mTxtCurrentTool!!.setText(R.string.label_text)*/
         }
       }
       ToolType.CROP -> {
@@ -409,10 +409,10 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
       }
       ToolType.ERASER -> {
         mPhotoEditor!!.brushEraser()
-        mTxtCurrentTool!!.setText(R.string.label_eraser_mode)
+        /*mTxtCurrentTool!!.setText(R.string.label_eraser_mode)*/
       }
       ToolType.FILTER -> {
-        mTxtCurrentTool!!.setText(R.string.label_filter)
+        /*mTxtCurrentTool!!.setText(R.string.label_filter)*/
         showFilter(true)
       }
       ToolType.STICKER -> showBottomSheetDialogFragment(mStickerFragment)
@@ -526,7 +526,7 @@ open class PhotoEditorActivity : AppCompatActivity(), OnPhotoEditorListener, Vie
   override fun onBackPressed() {
     if (mIsFilterVisible) {
       showFilter(false)
-      mTxtCurrentTool!!.setText(R.string.app_name)
+     /* mTxtCurrentTool!!.setText(R.string.app_name)*/
     } else if (!mPhotoEditor!!.isCacheEmpty) {
       showSaveDialog()
     } else if (mIsCropVisible) {

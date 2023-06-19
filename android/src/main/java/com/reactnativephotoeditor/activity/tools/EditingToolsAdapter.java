@@ -26,8 +26,11 @@ public class EditingToolsAdapter extends RecyclerView.Adapter<EditingToolsAdapte
 
   public EditingToolsAdapter(OnItemSelected onItemSelected, ArrayList<String> hideControls) {
     mOnItemSelected = onItemSelected;
-    if (!hideControls.contains("Shape")) {
-      mToolList.add(new ToolModel("Shape", R.drawable.ic_brush, ToolType.SHAPE));
+    if (!hideControls.contains("Text")) {
+      mToolList.add(new ToolModel("Text", R.drawable.ic_smallcaps, ToolType.TEXT));
+    }
+    if (!hideControls.contains("Draw")) {
+      mToolList.add(new ToolModel("Draw", R.drawable.ic_brush, ToolType.SHAPE));
     }
     if (!hideControls.contains("Eraser")) {
       mToolList.add(new ToolModel("Eraser", R.drawable.ic_eraser, ToolType.ERASER));
@@ -41,9 +44,7 @@ public class EditingToolsAdapter extends RecyclerView.Adapter<EditingToolsAdapte
     if (!hideControls.contains("Sticker")) {
       mToolList.add(new ToolModel("Sticker", R.drawable.ic_sticker, ToolType.STICKER));
     }
-    if (!hideControls.contains("Text")) {
-      mToolList.add(new ToolModel("Text", R.drawable.ic_smallcaps, ToolType.TEXT));
-    }
+
   }
 
   public interface OnItemSelected {
